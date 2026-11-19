@@ -1,0 +1,25 @@
+{
+  "name": "Catata — Notes & Weekly Planner",
+  "short_name": "Catata",
+  "description": "Your little space to think, plan, and remember. Analog pocket journal & weekly planner.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F4EEDF",
+  "theme_color": "#F4EEDF",
+  "categories": ["productivity", "lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

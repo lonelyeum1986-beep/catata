@@ -1,0 +1,426 @@
+@import "tailwindcss";
+
+:root {
+  --desk-bg: #EDE6D6;
+  --paper-cream: #F4EEDF;
+  --warm-ivory: #FAF7EF;
+  --terracotta: #B87561;
+  --ink-black: #292923;
+  --faded-blue: #9EAFB5;
+  --kraft-brown: #B69A76;
+  --kraft-paper: #EFE3C8;
+  --muted-olive: #777D60;
+  --vintage-red: #AD6B62;
+  --soft-graphite: #77736C;
+  --light-grey: #E5E0D5;
+  --notebook-line: #DDD7C9;
+  --cover-leather: #8F7659;
+  --cover-border: #6E5840;
+  --cover-accent: #D6B084;
+  --crease-shadow: rgba(41, 41, 35, 0.11);
+  --active-note-font-size: 1.12rem;
+  --active-note-line-height: 1.48;
+}
+
+html.dark {
+  --desk-bg: #121110;
+  --paper-cream: #1B1A17;
+  --warm-ivory: #22201D;
+  --terracotta: #C7826D;
+  --ink-black: #EAE3D2;
+  --faded-blue: #879BA3;
+  --kraft-brown: #9D8260;
+  --kraft-paper: #2D2923;
+  --muted-olive: #8E9773;
+  --vintage-red: #C07A70;
+  --soft-graphite: #9B9488;
+  --light-grey: #2B2823;
+  --notebook-line: #34302A;
+  --cover-leather: #3B332A;
+  --cover-border: #26211B;
+  --cover-accent: #B39674;
+  --crease-shadow: rgba(0, 0, 0, 0.45);
+}
+
+/* Custom Book Cover Skins & Theme Accents */
+html[data-skin="leather"],
+html.dark[data-skin="leather"] {
+  --cover-leather: #8F7659;
+  --cover-border: #634F39;
+  --cover-accent: #DFBE96;
+}
+
+html[data-skin="terracotta"],
+html.dark[data-skin="terracotta"] {
+  --cover-leather: #A65E4A;
+  --cover-border: #783F30;
+  --cover-accent: #F0C6B6;
+  --terracotta: #B8654E;
+}
+
+html[data-skin="olive"],
+html.dark[data-skin="olive"] {
+  --cover-leather: #5D6649;
+  --cover-border: #414832;
+  --cover-accent: #CBD4B2;
+  --terracotta: #6D7856;
+}
+
+html[data-skin="midnight"],
+html.dark[data-skin="midnight"] {
+  --cover-leather: #282623;
+  --cover-border: #171614;
+  --cover-accent: #C7B69E;
+}
+
+html[data-skin="navy"],
+html.dark[data-skin="navy"] {
+  --cover-leather: #364954;
+  --cover-border: #223038;
+  --cover-accent: #B6CCD8;
+  --terracotta: #4B6675;
+}
+
+body {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  background-color: var(--warm-ivory);
+  color: var(--ink-black);
+  margin: 0;
+  min-height: 100vh;
+}
+
+@media (min-width: 1280px) {
+  body {
+    background-color: var(--desk-bg);
+    background-image: radial-gradient(rgba(41, 41, 35, 0.045) 1px, transparent 0);
+    background-size: 18px 18px;
+  }
+
+  html.dark body {
+    background-image: radial-gradient(rgba(234, 227, 210, 0.035) 1px, transparent 0);
+  }
+}
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-variation-settings: "SOFT" 40, "WONK" 0;
+}
+
+/* Dynamic Note Font Family & Calibrated Font Size */
+.font-note-content {
+  font-family: var(--font-caveat), cursive;
+  font-size: var(--active-note-font-size) !important;
+  line-height: var(--active-note-line-height) !important;
+  letter-spacing: 0.01em;
+}
+
+body.handwriting-off .font-note-content {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+/* Force Single-Page Clean Layout on Mobile & Tablet (< 1280px) */
+@media (max-width: 1279px) {
+  .single-page-tablet-spread .lg\:grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+/* Wide Desktop Physical Book Cover & Stacked Pages (>= 1280px) */
+@media (min-width: 1280px) {
+  .book-cover {
+    background-color: var(--cover-leather);
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.025) 0px,
+        rgba(255, 255, 255, 0.025) 2px,
+        transparent 2px,
+        transparent 6px
+      ),
+      radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 12px 12px, 10px 10px;
+    border: 2px solid var(--cover-border);
+    box-shadow:
+      0 24px 50px -12px rgba(41, 41, 35, 0.25),
+      0 6px 16px -4px rgba(41, 41, 35, 0.14);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .book-pages-stack {
+    background-color: var(--warm-ivory);
+    box-shadow:
+      -3px 0 0 var(--light-grey),
+      -6px 0 0 var(--notebook-line),
+      3px 0 0 var(--light-grey),
+      6px 0 0 var(--notebook-line);
+  }
+}
+
+/* Closed Physical Book Cover Surface & Stacked Paper Edge */
+.closed-book-surface {
+  background-color: var(--cover-leather);
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 2px,
+      transparent 2px,
+      transparent 7px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.04) 0px,
+      rgba(0, 0, 0, 0.04) 2px,
+      transparent 2px,
+      transparent 7px
+    );
+  border: 2px solid var(--cover-border);
+  box-shadow:
+    inset 18px 0 28px rgba(0, 0, 0, 0.26),
+    inset -3px 0 8px rgba(255, 255, 255, 0.14),
+    5px 0 0 #EDE6D6,
+    7px 0 0 #C8BFA8,
+    10px 0 0 #E5DEC9,
+    12px 0 0 var(--cover-border),
+    0 28px 55px -12px rgba(41, 41, 35, 0.42);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* GPU-Accelerated Book Opening & Page Turn Animations */
+@keyframes bookCoverSwingOpen {
+  0% {
+    opacity: 1;
+    transform: perspective(1400px) rotateY(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: perspective(1400px) rotateY(-68deg) translateX(-28px) scale(0.97);
+  }
+}
+
+@keyframes notebookSpreadEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pageTurnFade {
+  0% {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-book-opening {
+  transform-origin: left center;
+  will-change: transform, opacity;
+  animation: bookCoverSwingOpen 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-spread-enter {
+  will-change: transform, opacity;
+  animation: notebookSpreadEnter 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-page-turn {
+  will-change: transform, opacity;
+  animation: pageTurnFade 0.26s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Custom Paper Scrollbar */
+.notebook-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.notebook-scroll::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.notebook-scroll::-webkit-scrollbar-track,
+.notebook-scroll::-webkit-scrollbar-track-piece,
+.notebook-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.notebook-scroll::-webkit-scrollbar-track {
+  margin-block: 14px;
+}
+
+.notebook-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(182, 154, 118, 0.25);
+  border-radius: 9999px;
+}
+
+.notebook-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(182, 154, 118, 0.72);
+}
+
+.notebook-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--terracotta);
+}
+
+/* Center Book Spine Crease */
+.center-crease {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(41, 41, 35, 0.03) 35%,
+    var(--crease-shadow) 50%,
+    rgba(41, 41, 35, 0.03) 65%,
+    transparent 100%
+  );
+}
+
+/* Paper Surface Patterns */
+.surface-ruled {
+  background-color: var(--warm-ivory);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 31px,
+    var(--notebook-line) 31px,
+    var(--notebook-line) 32px
+  );
+}
+
+.surface-dotted {
+  background-color: var(--warm-ivory);
+  background-image: radial-gradient(var(--kraft-brown) 1.15px, transparent 1.15px);
+  background-size: 20px 20px;
+}
+
+.surface-grid {
+  background-color: var(--warm-ivory);
+  background-image:
+    linear-gradient(to right, var(--notebook-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--notebook-line) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.surface-blank {
+  background-color: var(--warm-ivory);
+}
+
+.surface-kraft {
+  background-color: var(--kraft-paper);
+  background-image: radial-gradient(rgba(41, 41, 35, 0.05) 1px, transparent 0);
+  background-size: 12px 12px;
+}
+
+/* Torn Sticky Kraft Note */
+.sticky-kraft {
+  background-color: var(--kraft-paper);
+  border: 1px solid rgba(182, 154, 118, 0.48);
+  box-shadow: 0 4px 10px rgba(41, 41, 35, 0.07);
+  position: relative;
+}
+
+.sticky-kraft::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 48px;
+  height: 11px;
+  background-color: rgba(250, 247, 239, 0.78);
+  border: 1px solid rgba(182, 154, 118, 0.35);
+}
+
+/* Protruding Right-Edge Woven Linen Fabric Tabs with Dashed Stitching */
+.edge-tab {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  border-radius: 0 11px 11px 0;
+  position: relative;
+  border-top: 1px solid rgba(0, 0, 0, 0.22);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.16) 0px,
+      rgba(255, 255, 255, 0.16) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.06) 2px,
+      rgba(0, 0, 0, 0.06) 2px,
+      rgba(0, 0, 0, 0.06) 4px
+    );
+  box-shadow:
+    3px 3px 7px rgba(41, 41, 35, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+  will-change: transform;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.edge-tab::after {
+  content: "";
+  position: absolute;
+  inset: 4px 4px 4px 1px;
+  border-top: 1.5px dashed rgba(250, 247, 239, 0.88);
+  border-right: 1.5px dashed rgba(250, 247, 239, 0.88);
+  border-bottom: 1.5px dashed rgba(250, 247, 239, 0.88);
+  border-radius: 0 7px 7px 0;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+}
+
+.edge-tab:hover {
+  transform: translateX(6px);
+  box-shadow: 5px 4px 10px rgba(41, 41, 35, 0.28);
+}
+
+.edge-tab.active-edge {
+  transform: translateX(9px);
+  font-weight: 700;
+}
+
+/* Rich Text ContentEditable Placeholder */
+.rich-note-editor:empty::before {
+  content: attr(data-placeholder);
+  color: var(--soft-graphite);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.rich-note-editor u {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-book-opening,
+  .animate-spread-enter,
+  .animate-page-turn,
+  .edge-tab {
+    animation: none !important;
+    transition: none !important;
+  }
+}
