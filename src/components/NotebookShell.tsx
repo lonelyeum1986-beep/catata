@@ -591,7 +591,7 @@ export default function NotebookShell() {
           </aside>
 
           {/* ==================== MAIN CONTENT AREA ==================== */}
-          <main className="single-page-tablet-spread flex-1 min-h-0 xl:h-full xl:overflow-hidden relative flex flex-col pb-20 xl:pb-0">
+          <main className="single-page-tablet-spread flex-1 min-h-0 xl:h-full xl:overflow-hidden relative flex flex-col pb-24 xl:pb-0">
             {/* Bayangan Lipatan Tengah Buku hanya muncul pada Desktop Lebar (>= 1280px) */}
             <div className="hidden xl:block center-crease absolute inset-y-0 left-1/2 -translate-x-1/2 w-10 pointer-events-none z-20" />
 
@@ -947,73 +947,6 @@ export default function NotebookShell() {
               )}
             </div>
           </main>
-
-          {/* ==================== MOBILE & TABLET BOTTOM TAB BAR (< 1280px) ==================== */}
-          <nav
-            className="xl:hidden fixed bottom-0 left-0 right-0 z-40 grid grid-cols-5 border-t"
-            style={{
-              backgroundColor: 'var(--paper-cream)',
-              borderColor: 'var(--notebook-line)',
-            }}
-          >
-            {[
-              {
-                id: 'today',
-                label: 'Today',
-                icon: Sun,
-                color: 'var(--terracotta)',
-              },
-              {
-                id: 'notes',
-                label: 'Notes',
-                icon: FileText,
-                color: 'var(--faded-blue)',
-              },
-              {
-                id: 'planner',
-                label: 'Planner',
-                icon: Calendar,
-                color: 'var(--kraft-brown)',
-              },
-              {
-                id: 'collection',
-                label: 'Folder',
-                icon: FolderOpen,
-                color: 'var(--muted-olive)',
-              },
-              {
-                id: 'settings',
-                label: 'Setting',
-                icon: Settings,
-                color: 'var(--vintage-red)',
-              },
-            ].map((tab) => {
-              const Icon = tab.icon;
-              const isActive = activeTab === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => {
-                    if (tab.id === 'notes') setNotesInitialFilter('all');
-                    setActiveTab(tab.id as ModuleTab);
-                  }}
-                  className="flex flex-col items-center justify-center py-2.5 gap-1 text-[11px] font-medium border-t-2 cursor-pointer"
-                  style={{
-                    borderTopColor: isActive ? tab.color : 'transparent',
-                    color: isActive
-                      ? 'var(--ink-black)'
-                      : 'var(--soft-graphite)',
-                  }}
-                >
-                  <Icon
-                    className="w-4 h-4"
-                    style={{ color: isActive ? tab.color : 'currentColor' }}
-                  />
-                  <span>{tab.label}</span>
-                </button>
-              );
-            })}
-          </nav>
         </div>
 
         {/* ==================== DESKTOP WOVEN FABRIC & DASHED STITCHED RIGHT INDEX TABS ==================== */}
@@ -1041,6 +974,73 @@ export default function NotebookShell() {
           ))}
         </div>
       </div>
+
+      {/* ==================== MOBILE & TABLET BOTTOM TAB BAR (< 1280px) DI LUAR KONTAINER ANIMASI ==================== */}
+      <nav
+        className="xl:hidden fixed bottom-0 left-0 right-0 z-50 grid grid-cols-5 border-t pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_14px_rgba(41,41,35,0.08)]"
+        style={{
+          backgroundColor: 'var(--paper-cream)',
+          borderColor: 'var(--notebook-line)',
+        }}
+      >
+        {[
+          {
+            id: 'today',
+            label: 'Today',
+            icon: Sun,
+            color: 'var(--terracotta)',
+          },
+          {
+            id: 'notes',
+            label: 'Notes',
+            icon: FileText,
+            color: 'var(--faded-blue)',
+          },
+          {
+            id: 'planner',
+            label: 'Planner',
+            icon: Calendar,
+            color: 'var(--kraft-brown)',
+          },
+          {
+            id: 'collection',
+            label: 'Folder',
+            icon: FolderOpen,
+            color: 'var(--muted-olive)',
+          },
+          {
+            id: 'settings',
+            label: 'Setting',
+            icon: Settings,
+            color: 'var(--vintage-red)',
+          },
+        ].map((tab) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => {
+                if (tab.id === 'notes') setNotesInitialFilter('all');
+                setActiveTab(tab.id as ModuleTab);
+              }}
+              className="flex flex-col items-center justify-center py-2.5 gap-1 text-[11px] font-medium border-t-2 cursor-pointer"
+              style={{
+                borderTopColor: isActive ? tab.color : 'transparent',
+                color: isActive
+                  ? 'var(--ink-black)'
+                  : 'var(--soft-graphite)',
+              }}
+            >
+              <Icon
+                className="w-4 h-4"
+                style={{ color: isActive ? tab.color : 'currentColor' }}
+              />
+              <span>{tab.label}</span>
+            </button>
+          );
+        })}
+      </nav>
     </div>
   );
 }
